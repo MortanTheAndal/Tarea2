@@ -1,34 +1,55 @@
 package tarea2;
-
 import java.util.ArrayList;
 
 public class ClassicHeap implements PriorityQueue{
-    private ArrayList<Integer> heap;
+    private ArrayList<Node> heap;
     public ClassicHeap(){
-         this.heap = new ArrayList<Integer>();
+         this.heap = new ArrayList<>();
+         this.heap_length =  heap.size();
     }
-
+    private int heap_length;
     @Override
     public void insertar(int x, int p) {
-        this.heap.add(x);
-        emerger(this.heap, x, p);
+        Node new_node = new Node(x,p);
+        this.heap.add(new_node);
+        this.heap_length =  heap.size();
+        emerger(this.heap);
     }
 
-    private void emerger(ArrayList<Integer> heap, int x, int p) {
-
+    private void emerger(ArrayList<Node> heap) {
+        for (int j = heap_length-1; j>1 && heap.get(j).prioridad > heap.get(j/2).prioridad; j /= 2){
+            Node temp = heap.get(j);
+            heap.add(j, heap.get(j/2));
+            heap.add(j/2, temp);
+        }
     }
 
     @Override
     public int extraer_siguiente() {
-        int first = this.heap.get(0);
-        int last = this.heap.get(this.heap.size() - 1);
-        this.heap.remove(this.heap.size() - 1);
+        Node first = this.heap.get(0);
+        Node last = this.heap.get(this.heap_length - 1);
+        this.heap.remove(this.heap_length- 1);
         this.heap.add(0, last);
+        this.heap_length =  heap.size();
         sumerger(this.heap);
-        return first;
+        return first.valor;
     }
 
-    private void sumerger(ArrayList<Integer> heap) {
+    private void sumerger(ArrayList<Node> heap) {
+        int j = 0;
+        while(2*j <= this.heap_length-1){
+            int k = 2*j;
+            if(k+1 <= heap_length-1 && heap.get(k+1).prioridad > heap.get(k).prioridad){
+                k += 1;
+            }
+            if (heap.get(j).prioridad > heap.get(k).prioridad){
+                break;
+            }
+            Node temp = heap.get(j);
+            heap.add(j, heap.get(k));
+            heap.add(k, temp);
+            j=k;
+        }
     }
 
     @Override
