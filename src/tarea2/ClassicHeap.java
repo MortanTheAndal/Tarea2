@@ -3,11 +3,16 @@ import java.util.ArrayList;
 
 public class ClassicHeap implements PriorityQueue{
     private ArrayList<Node> heap;
+    private int heap_length;
     public ClassicHeap(){
          this.heap = new ArrayList<>();
          this.heap_length =  heap.size();
     }
-    private int heap_length;
+
+    public ClassicHeap(ArrayList<Node> list){
+        this.heap = list;
+        this.heap_length = list.size();
+    }
     @Override
     public void insertar(int x, int p) {
         Node new_node = new Node(x,p);
@@ -52,8 +57,18 @@ public class ClassicHeap implements PriorityQueue{
         }
     }
 
-    @Override
-    public PriorityQueue meld(PriorityQueue c0, PriorityQueue c1) {
+    public ClassicHeap meld(ClassicHeap c1, ClassicHeap c2) {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        for(Node node: c1.heap){
+            list.add(node.valor);
+        }
+        for(Node node: c2.heap){
+            list.add(node.valor);
+        }
+        return this.heapify(list);
+    }
+
+    public ClassicHeap heapify(ArrayList<Integer> list) {
         return null;
     }
 }
