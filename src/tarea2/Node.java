@@ -1,12 +1,12 @@
 package tarea2;
 
-class Node {
+public class Node {
     int valor;
     int prioridad;
     Node left;
     Node right;
 
-    Node(int x, int p){
+    public Node(int x, int p){
         this.valor = x;
         this.prioridad = p;
         }
