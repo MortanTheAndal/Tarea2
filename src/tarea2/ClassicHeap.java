@@ -9,10 +9,6 @@ public class ClassicHeap implements PriorityQueue{
          this.heap_length =  heap.size();
     }
 
-    public ClassicHeap(ArrayList<Node> list){
-        this.heap = list;
-        this.heap_length = list.size();
-    }
     @Override
     public void insertar(int x, int p) {
         Node new_node = new Node(x,p);
@@ -58,17 +54,14 @@ public class ClassicHeap implements PriorityQueue{
     }
 
     public ClassicHeap meld(ClassicHeap c1, ClassicHeap c2) {
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        for(Node node: c1.heap){
-            list.add(node.valor);
-        }
-        for(Node node: c2.heap){
-            list.add(node.valor);
-        }
-        return this.heapify(list);
+        c1.heap.addAll(c2.heap);
+        return this.heapify(c1.heap);
     }
 
-    public ClassicHeap heapify(ArrayList<Integer> list) {
-        return null;
+    public ClassicHeap heapify(ArrayList<Node> list) {
+        this.heap = list;
+        this.heap_length = list.size();
+
+        return this;
     }
 }
