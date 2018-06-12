@@ -18,17 +18,14 @@ public class ClassicHeap implements PriorityQueue{
 
     @Override
     public void insertar(int x, int p) {
-        Node new_node = new Node(x,p);
-        this.heap.add(new_node);
-        this.heap_length =  heap.size();
-        emerger(this.heap);
+        this.heap.add(new Node(x,p));
+        this.heap_length =  this.heap.size();
+        emerger();
     }
 
-    private void emerger(ArrayList<Node> heap) {
-        for (int j = heap_length-1; j>1 && heap.get(j).prioridad > heap.get(j/2).prioridad; j /= 2){
-            Node temp = heap.get(j);
-            heap.set(j, heap.get(j/2));
-            heap.set(j/2, temp);
+    private void emerger() {
+        for (int j = this.heap_length-1; j>1 && this.heap.get(j).prioridad > this.heap.get(j/2).prioridad; j /= 2){
+            this.swap(j,j/2);
         }
     }
 
@@ -51,6 +48,8 @@ public class ClassicHeap implements PriorityQueue{
 
     public ArrayList<Node> meld(ClassicHeap c1, ClassicHeap c2) {
         c1.heap.addAll(c2.heap);
+        this.heap = c1.heap;
+        this.heap_length = this.heap.size();
         return this.heapify();
     }
 
