@@ -44,6 +44,7 @@ public class ClassicHeapTest extends TestCase {
             writer.println(i +";"+ (heapify_finish - heapify_start) + ";" + (extraction_finish - extraction_start));
         }
     }
+
     @Test
     public void testInsertionAndMelding() throws FileNotFoundException, UnsupportedEncodingException {
         writer = new PrintWriter("Results/ClassicHeap_InsertionAndMelding.csv", "UTF-8");
