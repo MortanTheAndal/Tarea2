@@ -37,7 +37,6 @@ public class ClassicHeapTest extends TestCase {
             long heapify_start = System.currentTimeMillis() % 1000;
             System.out.println(nodeList.size());
             ClassicHeap heap = new ClassicHeap(nodeList);
-            System.out.println(heap.heap_length);
             long heapify_finish = System.currentTimeMillis() % 1000;
             System.out.println("End Heapify");
             ArrayList<Integer> sorted_data = new ArrayList<Integer>();
@@ -47,10 +46,8 @@ public class ClassicHeapTest extends TestCase {
             for(int k =0 ; k< length;k++){
                 sorted_data.add(heap.extraer_siguiente());
             }
-            System.out.println(nodeList.size());
             long extraction_finish = System.currentTimeMillis() % 1000;
             System.out.println("Stop Sorting");
-            System.out.println(sorted_data.size());
             assertEquals(0, heap.heap_length);
             writer.println(i +";"+ (heapify_finish - heapify_start) + ";" + (extraction_finish - extraction_start));
         }
