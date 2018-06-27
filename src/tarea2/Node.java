@@ -9,5 +9,7 @@ public class Node {
     public Node(int x, int p){
         this.valor = x;
         this.prioridad = p;
+        this.left = null;
+        this.right = null;
         }
 }
