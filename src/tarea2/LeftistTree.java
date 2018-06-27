@@ -4,12 +4,15 @@ import java.util.ArrayList;
 
 public class LeftistTree implements PriorityQueue {
     private Node root;
+    public int n_elem;
     public LeftistTree(){
         this.root = null;
+        this.n_elem = 0;
     }
 
     public LeftistTree(ArrayList <Node> list){
         this.root = null;
+        this.n_elem = list.size();
         this.heapify(list);
     }
 
@@ -21,11 +24,13 @@ public class LeftistTree implements PriorityQueue {
             return a;
         }
         if(a.valor < b.valor){
-            return merge(b,a);
+            Node temp = a;
+            a = b;
+            b = temp;
         }
         a.right = merge(a.right, b);
         if (a.left == null){
-            a.left = b.left;
+            a.left = a.right;
             a.right = null;
         }
         else{
@@ -48,6 +53,7 @@ public class LeftistTree implements PriorityQueue {
     public int extraer_siguiente() {
         int val = this.root.valor;
         this.root = this.merge(this.root.left, this.root.right);
+        this.n_elem--;
         return val;
     }
 
@@ -61,7 +67,7 @@ public class LeftistTree implements PriorityQueue {
 
     private void heapify(ArrayList<Node> list) {
         for (Node node:list){
-            this.root = merge(this.root, node);
+            this.root = merge(node,this.root);
         }
     }
 
