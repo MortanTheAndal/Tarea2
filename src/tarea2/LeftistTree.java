@@ -70,6 +70,4 @@ public class LeftistTree implements PriorityQueue {
             this.root = merge(node,this.root);
         }
     }
-
-
 }
