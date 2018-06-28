@@ -43,7 +43,7 @@ public class SkewHeap implements PriorityQueue{
         if(b == null){
             return a;
         }
-        if (a.valor < b.valor){
+        if (a.valor > b.valor){
             Node temp = a.left;
             a.left = merge(a.right, b);
             a.right = temp;
